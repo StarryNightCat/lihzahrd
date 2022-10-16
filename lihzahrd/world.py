@@ -36,6 +36,11 @@ class World:
         is_drunk_world: bool,
         is_for_the_worthy: bool,
         is_tenth_anniversary: bool,
+        is_dont_starve_world: bool,
+        is_not_the_bees_world: bool,
+        is_remix_world: bool,
+        is_no_traps_world: bool,
+        is_zenith_world: bool,
         created_on,
         styles: Styles,
         backgrounds: Backgrounds,
@@ -49,6 +54,7 @@ class World:
         saved_npcs: SavedNPCs,
         altars_smashed: int,
         is_hardmode: bool,
+        after_party_of_doom: bool,
         shadow_orbs: ShadowOrbs,
         bosses_defeated: BossesDefeated,
         anglers_quest: AnglerQuest,
@@ -127,6 +133,21 @@ class World:
         """If the world was created with the
         celebrationmk10 (https://terraria.fandom.com/wiki/Secret_world_seeds#Celebrationmk10) seed."""
 
+        self.is_dont_starve_world: bool = is_dont_starve_world
+        """TODO"""
+
+        self.is_not_the_bees_world: bool = is_not_the_bees_world
+        """TODO"""
+
+        self.is_remix_world: bool = is_remix_world
+        """TODO"""
+
+        self.is_no_traps_world: bool = is_no_traps_world
+        """TODO"""
+
+        self.is_zenith_world: bool = is_zenith_world
+        """TODO"""
+
         self.created_on = created_on
         """The date and time this world was created in."""
 
@@ -165,6 +186,9 @@ class World:
 
         self.is_hardmode: bool = is_hardmode
         """Whether or not the world is in hardmode."""
+
+        self.after_party_of_doom: bool = after_party_of_doom
+        """TODO"""
 
         self.shadow_orbs: ShadowOrbs = shadow_orbs
         """Information related to the Shadow Orbs or Crimson Hearts in the world."""
@@ -381,9 +405,9 @@ class World:
         version = Version(f.int4())
         relogic = f.string(7)
         savefile_type = f.uint1()
-        supported_versions = (Version("1.4.2.3"), Version("1.4.2.3"))
+        supported_versions = (Version("1.4.4.5"), Version("1.4.4.5"))
         if version not in supported_versions or relogic != "relogic" or savefile_type != 2:
-            raise NotImplementedError("This parser can only read Terraria 1.4.2.3 save files.")
+            raise NotImplementedError("This parser can only read Terraria 1.4.4.5 save files.")
 
         revision = f.uint4()
         is_favorite = f.uint8() != 0
@@ -409,6 +433,11 @@ class World:
         is_drunk_world = f.bool()
         is_for_the_worthy = f.bool()
         is_tenth_anniversary = f.bool()
+        is_dont_starve_world = f.bool()
+        is_not_the_bees_world = f.bool()
+        is_remix_world = f.bool()
+        is_no_traps_world = f.bool()
+        is_zenith_world = f.bool()
         created_on = f.datetime()
 
         world_styles = Styles(
@@ -467,6 +496,7 @@ class World:
         altars_smashed = f.int4()
 
         is_hardmode = f.bool()
+        after_party_of_doom = f.bool()
 
         invasion_delay = f.int4()
         invasion_size = f.int4()
@@ -681,6 +711,8 @@ class World:
             empress_of_light=defeated_empress_of_light,
             queen_slime=defeated_queen_slime,
         )
+
+        # TODO: Add Deerclop and town NPCs spawn flags
 
         unknown_world_header_data = f.read_until(pointers.world_tiles)
 
@@ -904,6 +936,11 @@ class World:
             is_drunk_world=is_drunk_world,
             is_for_the_worthy=is_for_the_worthy,
             is_tenth_anniversary=is_tenth_anniversary,
+            is_dont_starve_world=is_dont_starve_world,
+            is_not_the_bees_world=is_not_the_bees_world,
+            is_remix_world=is_remix_world,
+            is_no_traps_world=is_no_traps_world,
+            is_zenith_world=is_zenith_world,
             created_on=created_on,
             styles=world_styles,
             backgrounds=backgrounds,
@@ -917,6 +954,7 @@ class World:
             saved_npcs=saved_npcs,
             altars_smashed=altars_smashed,
             is_hardmode=is_hardmode,
+            after_party_of_doom=after_party_of_doom,
             shadow_orbs=shadow_orbs,
             bosses_defeated=bosses_defeated,
             anglers_quest=anglers_quest,
